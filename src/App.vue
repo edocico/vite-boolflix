@@ -2,6 +2,7 @@
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
 import { store } from "./store";
+import axios from "axios";
 
 export default {
   components: {
@@ -13,11 +14,12 @@ export default {
       store,
     };
   },
+  created() {},
 };
 </script>
 
 <template>
-  <div>
+  <div class="app">
     <AppHeader />
     <AppMain />
   </div>
@@ -25,4 +27,11 @@ export default {
 
 <style lang="scss">
 @use "./styles/general.scss" as *;
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 </style>
