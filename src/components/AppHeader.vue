@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       store,
-      search: "",
+      search: "star wars",
     };
   },
   methods: {
@@ -49,6 +49,7 @@ export default {
   <header class="app-header">
     <div class="logo">
       <h1>Boolflix</h1>
+      {{ search }}
     </div>
     <div class="search-box">
       <input
