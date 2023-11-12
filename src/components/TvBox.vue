@@ -12,10 +12,10 @@ export default {
 </script>
 <template>
   <div class="box">
-    <p>titolo</p>
-    <p>titolo originale</p>
-    <p>lingua</p>
-    <p>voto</p>
+    <p>{{ tvItem.name }}</p>
+    <p>{{ tvItem.original_name }}</p>
+    <p>{{ tvItem.original_language }}</p>
+    <p>{{ tvItem.vote_average }}</p>
   </div>
 </template>
 <style lang="scss" scoped>
