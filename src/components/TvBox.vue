@@ -16,8 +16,11 @@ export default {
 </script>
 <template>
   <div class="box">
-    <img :src="`${this.store.imgPath}${this.tvItem.poster_path}`" alt="" />
-    <p>{{ tvItem.name }}</p>
+    <img
+      :src="`${this.store.imgPath}${this.tvItem.poster_path}`"
+      alt="poster"
+    />
+    <h4>{{ tvItem.name }}</h4>
     <p>{{ tvItem.original_name }}</p>
     <p>{{ tvItem.original_language }}</p>
     <p>{{ tvItem.vote_average }}</p>
@@ -27,6 +30,17 @@ export default {
 .box {
   flex-basis: calc(100% / 5);
   padding: 10px;
-  overflow: auto;
+
+  img {
+    border: 2px solid white;
+    box-shadow: 0px 0px 5px black;
+    margin-bottom: 5px;
+  }
+
+  h4 {
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 0px 0px 3px black;
+  }
 }
 </style>

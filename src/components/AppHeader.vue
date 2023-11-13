@@ -8,40 +8,7 @@ export default {
       store: store,
     };
   },
-  methods: {
-    fetchQuery() {
-      if (this.store.searchText === "") {
-        store.movieResults = [];
-        store.tvResults = [];
-      }
-      axios
-        .get("https://api.themoviedb.org/3/search/movie", {
-          params: {
-            api_key: this.store.Api_Key,
-            language: "it-IT",
-            query: this.store.searchText,
-          },
-        })
-        .then((res) => {
-          console.log(res.data.results);
-          const movieItem = res.data.results;
-          this.store.movieResults = movieItem;
-        });
-      axios
-        .get("https://api.themoviedb.org/3/search/tv", {
-          params: {
-            api_key: this.store.Api_Key,
-            language: "it-IT",
-            query: this.store.searchText,
-          },
-        })
-        .then((res) => {
-          console.log(res.data.results);
-          const tvItem = res.data.results;
-          this.store.tvResults = tvItem;
-        });
-    },
-  },
+  methods: {},
   mounted() {
     console.log(this.store);
   },
@@ -58,9 +25,9 @@ export default {
         class="text-box"
         type="text"
         v-model.trim="store.searchText"
-        @keyup.enter="fetchQuery()"
+        @keyup.enter="$emit('search')"
       />
-      <button class="search-btn" @click="fetchQuery()">Cerca</button>
+      <button class="search-btn" @click="$emit('search')">Cerca</button>
     </div>
   </header>
 </template>

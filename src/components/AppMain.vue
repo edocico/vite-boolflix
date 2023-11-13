@@ -128,5 +128,6 @@ export default {
 
 .row {
   flex-wrap: wrap;
+  row-gap: 10px;
 }
 </style>
