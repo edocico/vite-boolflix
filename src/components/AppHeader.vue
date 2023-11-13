@@ -10,6 +10,10 @@ export default {
   },
   methods: {
     fetchQuery() {
+      if (this.store.searchText === "") {
+        store.movieResults = [];
+        store.tvResults = [];
+      }
       axios
         .get("https://api.themoviedb.org/3/search/movie", {
           params: {

@@ -1,7 +1,11 @@
 <script>
+import { store } from "../store";
+
 export default {
   data() {
-    return;
+    return {
+      store: store,
+    };
   },
   props: {
     tvItem: {
@@ -12,6 +16,7 @@ export default {
 </script>
 <template>
   <div class="box">
+    <img :src="`${this.store.imgPath}${this.tvItem.poster_path}`" alt="" />
     <p>{{ tvItem.name }}</p>
     <p>{{ tvItem.original_name }}</p>
     <p>{{ tvItem.original_language }}</p>

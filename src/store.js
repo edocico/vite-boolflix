@@ -6,4 +6,5 @@ export const store = reactive({
   Api_Key: "f402cbcfa914fa24a1871582eb55c24f",
   searchText: "",
   popularResults: [],
+  imgPath: "https://image.tmdb.org/t/p/w342",
 });

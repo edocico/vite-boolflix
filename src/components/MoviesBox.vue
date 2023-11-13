@@ -1,7 +1,11 @@
 <script>
+import { store } from "../store";
+
 export default {
   data() {
-    return;
+    return {
+      store: store,
+    };
   },
   props: {
     movieItem: {
@@ -12,6 +16,10 @@ export default {
 </script>
 <template>
   <div class="box">
+    <img
+      :src="`${this.store.imgPath}${this.movieItem.poster_path}`"
+      alt="poster"
+    />
     <p>{{ movieItem.title }}</p>
     <p>{{ movieItem.original_title }}</p>
     <p>{{ movieItem.original_language }}</p>
