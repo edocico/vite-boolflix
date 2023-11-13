@@ -56,7 +56,7 @@ export default {
         v-model.trim="store.searchText"
         @keyup.enter="fetchQuery()"
       />
-      <button class="search-btn">Cerca</button>
+      <button class="search-btn" @click="fetchQuery()">Cerca</button>
     </div>
   </header>
 </template>

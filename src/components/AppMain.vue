@@ -2,23 +2,41 @@
 import MoviesBox from "./MoviesBox.vue";
 import TvBox from "./TvBox.vue";
 import { store } from "../store";
+import axios from "axios";
+import PopularBox from "./PopularBox.vue";
 
 export default {
   components: {
     MoviesBox,
     TvBox,
+    PopularBox,
   },
   data() {
     return {
       store: store,
     };
   },
+  mounted() {
+    axios
+      .get("https://api.themoviedb.org/3/movie/popular", {
+        params: {
+          api_key: this.store.Api_Key,
+          language: "it-IT",
+        },
+      })
+      .then((res) => {
+        console.log(res.data.results);
+        const popularItem = res.data.results;
+        this.store.popularResults = popularItem;
+        console.log(this.store.popularResults);
+      });
+  },
 };
 </script>
 
 <template>
   <main class="app-main">
-    <section class="movies-section">
+    <section class="movies-section" v-if="store.movieResults.length > 0">
       <h2>movies:</h2>
       <div class="container">
         <div class="row">
@@ -30,7 +48,7 @@ export default {
         </div>
       </div>
     </section>
-    <section class="tv-section">
+    <section class="tv-section" v-if="store.tvResults.length > 0">
       <h2>tv:</h2>
       <div class="container">
         <div class="row">
@@ -38,6 +56,21 @@ export default {
             v-for="(tv, index) in this.store.tvResults"
             :key="index"
             :tvItem="tv"
+          />
+        </div>
+      </div>
+    </section>
+    <section
+      class="popular-section"
+      v-if="store.movieResults.length === 0 && store.tvResults.length === 0"
+    >
+      <h2>popular:</h2>
+      <div class="container">
+        <div class="row">
+          <PopularBox
+            v-for="(popular, index) in this.store.popularResults"
+            :key="index"
+            :popularItem="popular"
           />
         </div>
       </div>
@@ -54,7 +87,6 @@ export default {
   background-color: gray;
 
   .movies-section {
-    border-bottom: 1px solid black;
     flex-basis: calc(100% / 2);
     padding: 30px;
 
@@ -67,8 +99,18 @@ export default {
   }
 
   .tv-section {
-    border-bottom: 1px solid black;
     flex-basis: calc(100% / 2);
+    padding: 30px;
+
+    h2 {
+      text-transform: uppercase;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+      margin-bottom: 15px;
+    }
+  }
+
+  .popular-section {
     padding: 30px;
 
     h2 {

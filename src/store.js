@@ -5,4 +5,5 @@ export const store = reactive({
   tvResults: [],
   Api_Key: "f402cbcfa914fa24a1871582eb55c24f",
   searchText: "",
+  popularResults: [],
 });
