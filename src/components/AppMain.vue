@@ -84,7 +84,7 @@ export default {
   display: flex;
   overflow: auto;
   flex-direction: column;
-  background-color: gray;
+  background-color: #525659;
 
   .movies-section {
     flex-basis: calc(100% / 2);

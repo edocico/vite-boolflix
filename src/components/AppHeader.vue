@@ -18,7 +18,7 @@ export default {
 <template>
   <header class="app-header">
     <div class="logo">
-      <h1>Boolflix</h1>
+      <h1 @click="$emit('home')">Boolflix</h1>
     </div>
     <div class="search-box">
       <input

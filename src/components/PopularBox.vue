@@ -17,22 +17,34 @@ export default {
 
 <template>
   <div class="box">
-    <img
-      :src="`${this.store.imgPath}${this.popularItem.poster_path}`"
-      alt="poster"
-    />
-    <h4>{{ popularItem.title }}</h4>
-    <div class="overlay">
-      <p>{{ popularItem.original_title }}</p>
-      <p>{{ popularItem.original_language }}</p>
-      <p>{{ popularItem.vote_average }}</p>
+    <div class="card">
+      <img
+        :src="`${this.store.imgPath}${this.popularItem.poster_path}`"
+        alt="poster"
+      />
+      <div class="overlay">
+        <ul>
+          <li>
+            <span>Titolo originale:</span> {{ popularItem.original_title }}
+          </li>
+          <li><span>Voto:</span> {{ popularItem.vote_average }}</li>
+          <li><span>Overview:</span> {{ popularItem.overview }}</li>
+        </ul>
+      </div>
     </div>
+    <h4>{{ popularItem.title }}</h4>
+    <img
+      v-if="store.flags[popularItem.original_language]"
+      :src="store.flags[popularItem.original_language]"
+      alt=""
+    />
+    <p v-else>{{ popularItem.original_language }}</p>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .box {
-  flex-basis: calc(100% / 5);
+  flex-basis: calc(100% / 4);
   padding: 10px;
 
   img {
@@ -46,5 +58,37 @@ export default {
     color: white;
     text-shadow: 0px 0px 3px black;
   }
+
+  .card {
+    position: relative;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 50;
+    overflow: auto;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none;
+    padding: 5px;
+
+    li {
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    span {
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+  }
+}
+
+.box.box:hover .overlay {
+  display: block;
 }
 </style>

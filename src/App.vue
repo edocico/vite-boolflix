@@ -48,13 +48,16 @@ export default {
           this.store.tvResults = tvItem;
         });
     },
+    returnHome() {
+      (store.movieResults = []), (store.tvResults = []);
+    },
   },
 };
 </script>
 
 <template>
   <div class="app">
-    <AppHeader @search="fetchQuery" />
+    <AppHeader @search="fetchQuery" @home="returnHome" />
     <AppMain />
   </div>
 </template>

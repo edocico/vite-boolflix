@@ -28,7 +28,7 @@ export default {
 </template>
 <style lang="scss" scoped>
 .box {
-  flex-basis: calc(100% / 5);
+  flex-basis: calc(100% / 4);
   padding: 10px;
 
   img {
