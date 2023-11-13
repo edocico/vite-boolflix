@@ -1,15 +1,15 @@
 <script>
 import MoviesBox from "./MoviesBox.vue";
-import TvBox from "./TvBox.vue";
+//import TvBox from "./TvBox.vue";
 import { store } from "../store";
 import axios from "axios";
-import PopularBox from "./PopularBox.vue";
+//import PopularBox from "./PopularBox.vue";
 
 export default {
   components: {
     MoviesBox,
-    TvBox,
-    PopularBox,
+    //TvBox,
+    //PopularBox,
   },
   data() {
     return {
@@ -49,10 +49,10 @@ export default {
       </div>
     </section>
     <section class="tv-section" v-if="store.tvResults.length > 0">
-      <h2>tv:</h2>
+      <h2>tv show:</h2>
       <div class="container">
         <div class="row">
-          <TvBox
+          <MoviesBox
             v-for="(tv, index) in this.store.tvResults"
             :key="index"
             :tvItem="tv"
@@ -67,7 +67,7 @@ export default {
       <h2>popular:</h2>
       <div class="container">
         <div class="row">
-          <PopularBox
+          <MoviesBox
             v-for="(popular, index) in this.store.popularResults"
             :key="index"
             :popularItem="popular"

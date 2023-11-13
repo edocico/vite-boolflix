@@ -11,11 +11,17 @@ export default {
     movieItem: {
       type: Object,
     },
+    tvItem: {
+      type: Object,
+    },
+    popularItem: {
+      type: Object,
+    },
   },
 };
 </script>
 <template>
-  <div class="box">
+  <div class="box" v-if="movieItem">
     <div class="card">
       <img
         :src="`${this.store.imgPath}${this.movieItem.poster_path}`"
@@ -36,6 +42,55 @@ export default {
       alt="flag"
     />
     <p v-else>{{ movieItem.original_language }}</p>
+  </div>
+
+  <div class="box" v-if="tvItem">
+    <div class="card">
+      <img
+        :src="`${this.store.imgPath}${this.tvItem.poster_path}`"
+        alt="poster"
+      />
+      <div class="overlay">
+        <ul>
+          <li><span>Titolo originale:</span> {{ tvItem.original_name }}</li>
+          <li><span>Voto:</span> {{ tvItem.vote_average }}</li>
+          <li><span>Overview:</span> {{ tvItem.overview }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>{{ tvItem.name }}</h4>
+    <img
+      v-if="store.flags[tvItem.original_language]"
+      :src="store.flags[tvItem.original_language]"
+      alt="flag"
+    />
+    <p v-else>{{ tvItem.original_language }}</p>
+  </div>
+
+  <div class="box" v-if="popularItem">
+    <div class="card">
+      <img
+        :src="`${this.store.imgPath}${this.popularItem.poster_path}`"
+        alt="poster"
+      />
+      <div class="overlay">
+        <ul>
+          <li>
+            <span>Titolo originale:</span> {{ popularItem.original_title }}
+          </li>
+          <li><span>Voto:</span> {{ popularItem.vote_average }}</li>
+          <li><span>Overview:</span> {{ popularItem.overview }}</li>
+        </ul>
+      </div>
+    </div>
+    <h4>{{ popularItem.title }}</h4>
+    <img
+      v-if="store.flags[popularItem.original_language]"
+      :src="store.flags[popularItem.original_language]"
+      alt=""
+    />
+    <p v-else>{{ popularItem.original_language }}</p>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -74,7 +129,7 @@ export default {
 
     li {
       margin-bottom: 5px;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     span {
