@@ -13,5 +13,6 @@ export const store = reactive({
     fr: "https://flagsapi.com/FR/flat/24.png",
     de: "https://flagsapi.com/De/flat/24.png",
     es: "https://flagsapi.com/ES/flat/24.png",
+    ja: "https://flagsapi.com/JP/flat/24.png",
   },
 });

@@ -16,14 +16,27 @@ export default {
 </script>
 <template>
   <div class="box">
-    <img
-      :src="`${this.store.imgPath}${this.tvItem.poster_path}`"
-      alt="poster"
-    />
+    <div class="card">
+      <img
+        :src="`${this.store.imgPath}${this.tvItem.poster_path}`"
+        alt="poster"
+      />
+      <div class="overlay">
+        <ul>
+          <li><span>Titolo originale:</span> {{ tvItem.original_name }}</li>
+          <li><span>Voto:</span> {{ tvItem.vote_average }}</li>
+          <li><span>Overview:</span> {{ tvItem.overview }}</li>
+        </ul>
+      </div>
+    </div>
+
     <h4>{{ tvItem.name }}</h4>
-    <p>{{ tvItem.original_name }}</p>
-    <p>{{ tvItem.original_language }}</p>
-    <p>{{ tvItem.vote_average }}</p>
+    <img
+      v-if="store.flags[tvItem.original_language]"
+      :src="store.flags[tvItem.original_language]"
+      alt="flag"
+    />
+    <p v-else>{{ tvItem.original_language }}</p>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -42,5 +55,37 @@ export default {
     color: white;
     text-shadow: 0px 0px 3px black;
   }
+
+  .card {
+    position: relative;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 50;
+    overflow: auto;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none;
+    padding: 5px;
+
+    li {
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    span {
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+  }
+}
+
+.box.box:hover .overlay {
+  display: block;
 }
 </style>
