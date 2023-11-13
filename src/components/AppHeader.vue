@@ -5,8 +5,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      store,
-      search: "star wars",
+      store: store,
     };
   },
   methods: {
@@ -15,8 +14,8 @@ export default {
         .get("https://api.themoviedb.org/3/search/movie", {
           params: {
             api_key: this.store.Api_Key,
-            query: this.search,
-            language: "it_IT",
+            language: "it-IT",
+            query: this.store.searchText,
           },
         })
         .then((res) => {
@@ -28,8 +27,8 @@ export default {
         .get("https://api.themoviedb.org/3/search/tv", {
           params: {
             api_key: this.store.Api_Key,
-            query: this.search,
-            language: "it_IT",
+            language: "it-IT",
+            query: this.store.searchText,
           },
         })
         .then((res) => {
@@ -49,17 +48,15 @@ export default {
   <header class="app-header">
     <div class="logo">
       <h1>Boolflix</h1>
-      {{ search }}
     </div>
     <div class="search-box">
       <input
         class="text-box"
         type="text"
-        :v-model="search"
+        v-model.trim="store.searchText"
         @keyup.enter="fetchQuery()"
       />
       <button class="search-btn">Cerca</button>
-      {{ search }}
     </div>
   </header>
 </template>

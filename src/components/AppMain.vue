@@ -10,7 +10,7 @@ export default {
   },
   data() {
     return {
-      store,
+      store: store,
     };
   },
 };
@@ -49,7 +49,7 @@ export default {
 .app-main {
   flex-grow: 1;
   display: flex;
-  overflow: hidden;
+  overflow: auto;
   flex-direction: column;
   background-color: gray;
 

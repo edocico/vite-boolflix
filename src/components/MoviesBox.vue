@@ -22,5 +22,6 @@ export default {
 .box {
   flex-basis: calc(100% / 5);
   padding: 10px;
+  overflow: auto;
 }
 </style>
