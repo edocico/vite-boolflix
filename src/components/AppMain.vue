@@ -1,19 +1,18 @@
 <script>
 import MoviesBox from "./MoviesBox.vue";
-//import TvBox from "./TvBox.vue";
+
 import { store } from "../store";
 import axios from "axios";
-//import PopularBox from "./PopularBox.vue";
 
 export default {
   components: {
     MoviesBox,
-    //TvBox,
-    //PopularBox,
   },
   data() {
     return {
       store: store,
+      modalOpen: false,
+      modalInfo: {},
     };
   },
   mounted() {

@@ -3,6 +3,7 @@ import { store } from "../store";
 import axios from "axios";
 
 export default {
+  emits: ["search", "home"],
   data() {
     return {
       store: store,
