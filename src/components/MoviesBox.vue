@@ -8,89 +8,61 @@ export default {
     };
   },
   props: {
-    movieItem: {
+    item: {
       type: Object,
     },
-    tvItem: {
-      type: Object,
+  },
+  computed: {
+    title() {
+      if (this.item.title) {
+        return this.item.title;
+      } else if (this.item.name) {
+        return this.item.name;
+      }
     },
-    popularItem: {
-      type: Object,
+    originalTitle() {
+      if (this.item.original_title) {
+        return this.item.original_title;
+      } else if (this.item.original_name) {
+        return this.item.original_name;
+      }
+    },
+    vote() {
+      return Math.round(this.item.vote_average / 2);
     },
   },
 };
 </script>
 <template>
-  <div class="box" v-if="movieItem">
+  <div class="box">
     <div class="card">
       <img
-        :src="`${this.store.imgPath}${this.movieItem.poster_path}`"
+        :src="`${this.store.imgPath}${this.item.poster_path}`"
         alt="poster"
       />
       <div class="overlay">
         <ul>
-          <li><span>Titolo originale:</span> {{ movieItem.original_title }}</li>
-          <li><span>Voto:</span> {{ movieItem.vote_average }}</li>
-          <li><span>Overview:</span> {{ movieItem.overview }}</li>
-        </ul>
-      </div>
-    </div>
-    <h4>{{ movieItem.title }}</h4>
-    <img
-      v-if="store.flags[movieItem.original_language]"
-      :src="store.flags[movieItem.original_language]"
-      alt="flag"
-    />
-    <p v-else>{{ movieItem.original_language }}</p>
-  </div>
-
-  <div class="box" v-if="tvItem">
-    <div class="card">
-      <img
-        :src="`${this.store.imgPath}${this.tvItem.poster_path}`"
-        alt="poster"
-      />
-      <div class="overlay">
-        <ul>
-          <li><span>Titolo originale:</span> {{ tvItem.original_name }}</li>
-          <li><span>Voto:</span> {{ tvItem.vote_average }}</li>
-          <li><span>Overview:</span> {{ tvItem.overview }}</li>
-        </ul>
-      </div>
-    </div>
-
-    <h4>{{ tvItem.name }}</h4>
-    <img
-      v-if="store.flags[tvItem.original_language]"
-      :src="store.flags[tvItem.original_language]"
-      alt="flag"
-    />
-    <p v-else>{{ tvItem.original_language }}</p>
-  </div>
-
-  <div class="box" v-if="popularItem">
-    <div class="card">
-      <img
-        :src="`${this.store.imgPath}${this.popularItem.poster_path}`"
-        alt="poster"
-      />
-      <div class="overlay">
-        <ul>
+          <li><span>Titolo originale:</span> {{ originalTitle }}</li>
           <li>
-            <span>Titolo originale:</span> {{ popularItem.original_title }}
+            <span>Voto:</span>
+            <font-awesome-icon
+              v-for="n in vote"
+              :key="n"
+              :icon="['fas', 'star']"
+              class="star"
+            />
           </li>
-          <li><span>Voto:</span> {{ popularItem.vote_average }}</li>
-          <li><span>Overview:</span> {{ popularItem.overview }}</li>
+          <li><span>Overview:</span> {{ item.overview }}</li>
         </ul>
       </div>
     </div>
-    <h4>{{ popularItem.title }}</h4>
+    <h4>{{ title }}</h4>
     <img
-      v-if="store.flags[popularItem.original_language]"
-      :src="store.flags[popularItem.original_language]"
-      alt=""
+      v-if="store.flags[item.original_language]"
+      :src="store.flags[item.original_language]"
+      alt="flag"
     />
-    <p v-else>{{ popularItem.original_language }}</p>
+    <p v-else>{{ item.original_language }}</p>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -100,6 +72,7 @@ export default {
 
   img {
     border: 2px solid white;
+    border-radius: 10px;
     box-shadow: 0px 0px 5px black;
     margin-bottom: 5px;
   }
@@ -126,6 +99,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.9);
     display: none;
     padding: 5px;
+    border-radius: 10px;
 
     li {
       margin-bottom: 5px;
@@ -141,5 +115,9 @@ export default {
 
 .box.box:hover .overlay {
   display: block;
+}
+
+.star {
+  color: yellow;
 }
 </style>

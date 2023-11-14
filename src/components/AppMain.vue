@@ -42,7 +42,7 @@ export default {
           <MoviesBox
             v-for="(movie, index) in this.store.movieResults"
             :key="index"
-            :movieItem="movie"
+            :item="movie"
           />
         </div>
       </div>
@@ -54,7 +54,7 @@ export default {
           <MoviesBox
             v-for="(tv, index) in this.store.tvResults"
             :key="index"
-            :tvItem="tv"
+            :item="tv"
           />
         </div>
       </div>
@@ -69,7 +69,7 @@ export default {
           <MoviesBox
             v-for="(popular, index) in this.store.popularResults"
             :key="index"
-            :popularItem="popular"
+            :item="popular"
           />
         </div>
       </div>
