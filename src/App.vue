@@ -14,7 +14,20 @@ export default {
       store: store,
     };
   },
-  created() {},
+  mounted() {
+    axios
+      .get("https://api.themoviedb.org/3/genre/tv/list", {
+        params: {
+          api_key: this.store.Api_Key,
+          language: "it-IT",
+        },
+      })
+      .then((res) => {
+        console.log(res.data.genres);
+        const gen = res.data.genres;
+        this.store.generiResults = gen;
+      });
+  },
   methods: {
     fetchQuery() {
       (store.popularResults = []), (store.upcomingResults = []);
@@ -84,14 +97,25 @@ export default {
           this.store.upcomingResults = upcomingItem;
         });
     },
+    controlModal() {
+      this.store.modalOpen = !this.store.modalOpen;
+    },
+    closeModal() {
+      this.store.modalOpen = false;
+    },
   },
 };
 </script>
 
 <template>
   <div class="app">
-    <AppHeader @search="fetchQuery" @home="returnHome" @next="fetchUpcoming" />
-    <AppMain />
+    <AppHeader
+      @search="fetchQuery"
+      @home="returnHome"
+      @next="fetchUpcoming"
+      @open="controlModal"
+    />
+    <AppMain @close="closeModal" />
   </div>
 </template>
 

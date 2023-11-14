@@ -8,11 +8,10 @@ export default {
   components: {
     MoviesBox,
   },
+  emits: ["close"],
   data() {
     return {
       store: store,
-      modalOpen: false,
-      modalInfo: {},
     };
   },
   mounted() {
@@ -93,6 +92,21 @@ export default {
         </div>
       </div>
     </section>
+
+    <div class="modal" v-if="this.store.modalOpen">
+      <div class="list">
+        <ul>
+          <li v-for="(genere, index) in this.store.generiResults">
+            {{ genere.name }}
+          </li>
+        </ul>
+      </div>
+      <font-awesome-icon
+        @click="$emit('close')"
+        class="cross"
+        icon="fa-solid fa-xmark"
+      />
+    </div>
   </main>
 </template>
 
@@ -103,6 +117,7 @@ export default {
   overflow: auto;
   flex-direction: column;
   background-color: #525659;
+  position: relative;
 
   .movies-section {
     flex-basis: calc(100% / 2);
@@ -147,6 +162,32 @@ export default {
       color: white;
       text-shadow: 1px 1px 2px black;
       margin-bottom: 15px;
+    }
+  }
+
+  .modal {
+    background-color: rgba($color: #000000, $alpha: 0.9);
+    width: 20%;
+    min-height: 300px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+
+    .cross {
+      color: white;
+      font-size: 20px;
+    }
+
+    li {
+      color: white;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-weight: 900;
     }
   }
 }

@@ -3,7 +3,7 @@ import { store } from "../store";
 import axios from "axios";
 
 export default {
-  emits: ["search", "home", "next"],
+  emits: ["search", "home", "next", "open"],
   data() {
     return {
       store: store,
@@ -24,7 +24,7 @@ export default {
     <div class="menu">
       <ul>
         <li @click="$emit('home')"><a href="#">Home</a></li>
-        <li><a href="#">Generi</a></li>
+        <li @click="$emit('open')"><a href="#">Generi</a></li>
         <li @click="$emit('next')"><a href="#">In arrivo</a></li>
       </ul>
     </div>
@@ -44,7 +44,7 @@ export default {
 <style lang="scss" scoped>
 .app-header {
   min-height: 120px;
-
+  position: relative;
   display: flex;
   padding: 30px;
   justify-content: space-between;

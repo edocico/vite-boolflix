@@ -7,6 +7,7 @@ export const store = reactive({
   searchText: "",
   popularResults: [],
   upcomingResults: [],
+  generiResults: [],
   imgPath: "https://image.tmdb.org/t/p/w342",
   flags: {
     it: "https://flagsapi.com/IT/flat/24.png",
@@ -16,4 +17,5 @@ export const store = reactive({
     es: "https://flagsapi.com/ES/flat/24.png",
     ja: "https://flagsapi.com/JP/flat/24.png",
   },
+  modalOpen: false,
 });
