@@ -47,6 +47,7 @@ export default {
         </div>
       </div>
     </section>
+
     <section class="tv-section" v-if="store.tvResults.length > 0">
       <h2>tv show:</h2>
       <div class="container">
@@ -59,9 +60,14 @@ export default {
         </div>
       </div>
     </section>
+
     <section
       class="popular-section"
-      v-if="store.movieResults.length === 0 && store.tvResults.length === 0"
+      v-if="
+        store.movieResults.length === 0 &&
+        store.tvResults.length === 0 &&
+        store.upcomingResults.length === 0
+      "
     >
       <h2>popular:</h2>
       <div class="container">
@@ -70,6 +76,19 @@ export default {
             v-for="(popular, index) in this.store.popularResults"
             :key="index"
             :item="popular"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="upcoming-section" v-if="store.upcomingResults.length > 0">
+      <h2>upcoming:</h2>
+      <div class="container">
+        <div class="row">
+          <MoviesBox
+            v-for="(upcoming, index) in this.store.upcomingResults"
+            :key="index"
+            :item="upcoming"
           />
         </div>
       </div>
@@ -110,6 +129,17 @@ export default {
   }
 
   .popular-section {
+    padding: 30px;
+
+    h2 {
+      text-transform: uppercase;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+      margin-bottom: 15px;
+    }
+  }
+
+  .upcoming-section {
     padding: 30px;
 
     h2 {

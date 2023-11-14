@@ -52,6 +52,7 @@ export default {
               class="star"
             />
           </li>
+          <li><span>Data di pubblicazione:</span> {{ item.release_date }}</li>
           <li><span>Overview:</span> {{ item.overview }}</li>
         </ul>
       </div>

@@ -6,6 +6,7 @@ export const store = reactive({
   Api_Key: "f402cbcfa914fa24a1871582eb55c24f",
   searchText: "",
   popularResults: [],
+  upcomingResults: [],
   imgPath: "https://image.tmdb.org/t/p/w342",
   flags: {
     it: "https://flagsapi.com/IT/flat/24.png",
