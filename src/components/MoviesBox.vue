@@ -43,6 +43,12 @@ export default {
       />
       <img v-else src="/netflix.png" alt="placeholder" />
       <div class="overlay">
+        <div class="play-btn">
+          <span
+            ><font-awesome-icon class="icon" icon="fa-solid fa-circle-play"
+          /></span>
+          <span>Guarda ora</span>
+        </div>
         <ul>
           <li><span>Titolo originale:</span> {{ originalTitle }}</li>
           <li>
@@ -97,7 +103,7 @@ export default {
     right: 0px;
     bottom: 0px;
     z-index: 50;
-    overflow: auto;
+    overflow: hidden;
     color: white;
     background-color: rgba(0, 0, 0, 0.9);
     display: none;
@@ -122,5 +128,18 @@ export default {
 
 .star {
   color: yellow;
+}
+
+.play-btn {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  align-items: center;
+
+  .icon {
+    font-size: 30px;
+  }
 }
 </style>
