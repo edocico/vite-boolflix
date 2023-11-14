@@ -29,6 +29,28 @@ export default {
         console.log(this.store.popularResults);
       });
   },
+  methods: {
+    fetchByGenres(data) {
+      (store.popularResults = []),
+        (store.upcomingResults = []),
+        (store.movieResults = []),
+        (store.tvResults = []);
+      store.byGenResults = [];
+      axios
+        .get("https://api.themoviedb.org/3/discover/movie", {
+          params: {
+            api_key: this.store.Api_Key,
+            language: "it_IT",
+            with_genres: data,
+          },
+        })
+        .then((res) => {
+          console.log(res.data.results);
+          const genItem = res.data.results;
+          this.store.byGenResults = genItem;
+        });
+    },
+  },
 };
 </script>
 
@@ -65,7 +87,8 @@ export default {
       v-if="
         store.movieResults.length === 0 &&
         store.tvResults.length === 0 &&
-        store.upcomingResults.length === 0
+        store.upcomingResults.length === 0 &&
+        store.popularResults.length > 0
       "
     >
       <h2>popular:</h2>
@@ -93,16 +116,32 @@ export default {
       </div>
     </section>
 
+    <section class="genere-section" v-if="store.byGenResults.length > 0">
+      <div class="container">
+        <div class="row">
+          <MoviesBox
+            v-for="(ofGen, index) in this.store.byGenResults"
+            :key="index"
+            :item="ofGen"
+          />
+        </div>
+      </div>
+    </section>
+
     <div class="modal" v-if="this.store.modalOpen">
       <div class="list">
         <ul>
-          <li v-for="(genere, index) in this.store.generiResults">
-            {{ genere.name }}
+          <li
+            v-for="(genere, index) in this.store.generiResults"
+            :key="index"
+            @click="fetchByGenres(genere[index].name)"
+          >
+            <a href="#"> {{ genere.name }} </a>
           </li>
         </ul>
       </div>
       <font-awesome-icon
-        @click="$emit('close')"
+        @click.="$emit('close')"
         class="cross"
         icon="fa-solid fa-xmark"
       />
@@ -163,6 +202,10 @@ export default {
       text-shadow: 1px 1px 2px black;
       margin-bottom: 15px;
     }
+  }
+
+  .genere-section {
+    padding: 30px;
   }
 
   .modal {

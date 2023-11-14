@@ -8,6 +8,7 @@ export const store = reactive({
   popularResults: [],
   upcomingResults: [],
   generiResults: [],
+  byGenResults: [],
   imgPath: "https://image.tmdb.org/t/p/w342",
   flags: {
     it: "https://flagsapi.com/IT/flat/24.png",
