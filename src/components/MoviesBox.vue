@@ -37,9 +37,11 @@ export default {
   <div class="box">
     <div class="card">
       <img
+        v-if="item.poster_path"
         :src="`${this.store.imgPath}${this.item.poster_path}`"
         alt="poster"
       />
+      <img v-else src="/netflix.png" alt="placeholder" />
       <div class="overlay">
         <ul>
           <li><span>Titolo originale:</span> {{ originalTitle }}</li>
