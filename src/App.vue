@@ -66,6 +66,7 @@ export default {
       (store.movieResults = []),
         (store.tvResults = []),
         (store.upcomingResults = []);
+      store.byGenResults = [];
       axios
         .get("https://api.themoviedb.org/3/movie/popular", {
           params: {

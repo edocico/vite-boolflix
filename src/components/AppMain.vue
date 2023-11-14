@@ -37,7 +37,7 @@ export default {
         (store.tvResults = []);
       store.byGenResults = [];
       axios
-        .get("https://api.themoviedb.org/3/discover/movie", {
+        .get("https://api.themoviedb.org/3/discover/tv", {
           params: {
             api_key: this.store.Api_Key,
             language: "it_IT",
@@ -120,7 +120,7 @@ export default {
       <div class="container">
         <div class="row">
           <MoviesBox
-            v-for="(ofGen, index) in this.store.byGenResults"
+            v-for="(ofGen, index) in store.byGenResults"
             :key="index"
             :item="ofGen"
           />
@@ -128,13 +128,13 @@ export default {
       </div>
     </section>
 
-    <div class="modal" v-if="this.store.modalOpen">
+    <div class="modal" v-if="store.modalOpen">
       <div class="list">
         <ul>
           <li
-            v-for="(genere, index) in this.store.generiResults"
+            v-for="(genere, index) in store.generiResults"
             :key="index"
-            @click="fetchByGenres(genere[index].name)"
+            @click="fetchByGenres(genere.name)"
           >
             <a href="#"> {{ genere.name }} </a>
           </li>
